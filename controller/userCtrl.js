@@ -9,8 +9,6 @@ const asyncHandler = require("express-async-handler");
 const ValidateMongoDbId = require("../utils/validateMongodbid");
 const jwt = require("jsonwebtoken");
 const { generateRefreshToken } = require("../config/refreshtoken");
-const { get } = require("http");
-const { log } = require("console");
 
 // Create A User
 

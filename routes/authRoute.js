@@ -7,10 +7,8 @@ const {
   updateaUser,
   blockUser,
   unblockUser,
-  handleFreshToken,
   logOut,
   deleteaUser,
-  updatePassword,
   loginAdmin,
   getWishlist,
   saveAddress,
@@ -38,7 +36,7 @@ router.post("/cart", authmiddleware, userCart);
 router.post("/cart/applycoupon", authmiddleware, applyCoupon);
 router.post("/cart/cash-order", authmiddleware, createOrder);
 router.get("/get-orders", authmiddleware, getOrders);
-router.get("/refresh", handleFreshToken);
+// router.get("/refresh", handleFreshToken);
 router.get("/logout", logOut);
 router.get("/all-users", getAllUser);
 router.get("/get/:id", authmiddleware, isAdmin, getaUser);

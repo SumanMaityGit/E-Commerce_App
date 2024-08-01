@@ -1,5 +1,6 @@
 const { default: slugify } = require("slugify");
 const Product = require("../models/productModel");
+const productCategory = require("../models/prodcategoryModel");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const ValidateMongoDbId = require("../utils/validateMongodbid");
@@ -9,6 +10,11 @@ const createProduct = asyncHandler(async (req, res) => {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
     }
+    const isCategoryExist = await productCategory.findOne({
+      title: req.body.category,
+    });
+    if (!isCategoryExist)
+      res.send({ status: 404, message: "product category not found" });
     const newProduct = await Product.create(req.body);
     res.json(newProduct);
   } catch (error) {
@@ -149,6 +155,7 @@ const rating = asyncHandler(async (req, res) => {
     );
     if (alreadyRated) {
       const updateRating = await Product.updateOne(
+        //rating:[{"postedBy":"1",star:"4",comment:"good product"},{"postedBy":"3",star:"5",comment:"great"},{"postedBy":"5",star:"5",comment:"nice"}]
         {
           ratings: { $elemMatch: alreadyRated },
         },

@@ -4,6 +4,7 @@ const validateMongodbid = require("../utils/validateMongodbid");
 
 const createCategory = asyncHandler(async (req, res) => {
   try {
+    console.log(req.body);
     const newCategory = await Category.create(req.body);
     res.json(newCategory);
   } catch (error) {
